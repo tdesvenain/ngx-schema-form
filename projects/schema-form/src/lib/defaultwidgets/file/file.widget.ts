@@ -10,8 +10,9 @@ import { ControlWidget } from '../../widget';
 	</label>
     <span *ngIf="schema.description" class="formHelp">{{schema.description}}</span>
   <input [name]="name" class="text-widget file-widget" [attr.id]="id"
-    [formControl]="control" type="file" [attr.disabled]="schema.readOnly?true:null"
-    (change)="onFileChange($event)">
+         [formControl]="control" type="file" [attr.disabled]="schema.readOnly?true:null"
+         [accept]="schema?.mimeType ? schema.mimeType : ''"
+         (change)="onFileChange($event)">
 	<input *ngIf="schema.readOnly" [attr.name]="name" type="hidden" [formControl]="control">
 </div>`
 })
