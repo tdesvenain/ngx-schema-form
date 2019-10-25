@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 
 import { ControlWidget } from '../../widget';
 
@@ -41,10 +41,14 @@ export class FileWidget extends ControlWidget implements AfterViewInit {
 
   onFileChange($event) {
     const file = $event.target.files[0];
-    this.filedata.filename = file.name;
-    this.filedata.size = file.size;
-    this.filedata['content-type'] = file.type;
-    this.filedata.encoding = 'base64';
-    this.reader.readAsBinaryString(file);
+    if (file) {
+      this.filedata.filename = file.name;
+      this.filedata.size = file.size;
+      this.filedata['content-type'] = file.type;
+      this.filedata.encoding = 'base64';
+      this.reader.readAsBinaryString(file);
+    } else {
+      this.filedata = {};
+    }
   }
 }
